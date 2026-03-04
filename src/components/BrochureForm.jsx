@@ -114,6 +114,9 @@ const handleSubmit = async (e) => {
               <input
                 type="tel"
                 name="mobile"
+                maxLength="10"
+                pattern="[0-9]{10}"
+                inputMode="numeric"
                 required
                 className="flex-1 bg-transparent outline-none"
               />
