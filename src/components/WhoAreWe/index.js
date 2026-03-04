@@ -1,0 +1,10 @@
+export { default as WhoAreWe } from './WhoAreWe.jsx';
+export { default as PageHeader } from './PageHeader.jsx';
+export { default as OurStory } from './OurStory.jsx';
+export { default as OurMission } from './OurMission.jsx';
+export { default as WhatWeDo } from './WhatWeDo.jsx';
+export { default as FoundersTeam } from './FoundersTeam.jsx';
+export { default as Certifications } from './Certifications.jsx';
+export { default as KeyCollaborations } from './KeyCollaborations.jsx';
+export { default as BuildingTomorrow } from './BuildingTomorrow.jsx';
+export { default as Contact } from './Contact.jsx';

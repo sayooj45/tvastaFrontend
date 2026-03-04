@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Shared badge/tag style used across image cards */
+.tag-badge {
+  @apply flex justify-center items-center h-[40px] px-4 bg-white rounded-full;
+}
+
+/* Utility to hide native scrollbars (used for horizontal carousels) */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  height: 0; /* Chrome, Safari, Opera */
+  width: 0;
+  background: transparent;
+}
+.no-scrollbar {
+  overscroll-behavior-x: contain;
+}

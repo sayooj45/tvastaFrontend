@@ -1,0 +1,607 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: "Outfit", sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Animation utility classes */
+  .animate-on-scroll {
+    opacity: 0;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+  }
+
+  .slide-in-left {
+    transform: translateX(-100px);
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .slide-in-left.visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .slide-in-right {
+    transform: translateX(100px);
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .slide-in-right.visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .slide-in-up {
+    transform: translateY(100px);
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .slide-in-up.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .scale-up {
+    transform: scale(0.8);
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .scale-up.visible {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  /* Staggered list animations */
+  .staggered-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .staggered-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .hover-scale {
+    transition: transform 0.3s ease;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  /* Button animations */
+  .btn-animate {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-animate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-animate:active {
+    transform: translateY(0);
+  }
+
+  /* Primary Button - Blue (default for all buttons except download) */
+  .btn-primary {
+    background-color: #1d3357;
+    color: white;
+    border-radius: 50px;
+    transition: background-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    will-change: border-radius, background-color;
+  }
+
+  .btn-primary:hover {
+    background-color: #5a5a5a;
+    border-radius: 0px;
+  }
+
+  .btn-primary .btn-icon {
+    opacity: 0;
+    max-width: 0;
+    margin-left: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  .btn-primary:hover .btn-icon {
+    opacity: 1;
+    max-width: 24px;
+    margin-left: 4px;
+    transform: translateX(0);
+  }
+
+  /* Download Button - Red */
+  .btn-download {
+    background-color: #e63946;
+    color: white;
+    border-radius: 50px;
+    transition: background-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    will-change: border-radius, background-color;
+  }
+
+  .btn-download:hover {
+    background-color: #5a5a5a;
+    border-radius: 0px;
+  }
+
+  .btn-download .btn-icon {
+    opacity: 0;
+    max-width: 0;
+    margin-left: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  .btn-download:hover .btn-icon {
+    opacity: 0;
+    max-width: 0;
+    margin-left: 0;
+    transform: translateX(-8px);
+  }
+
+  /* Secondary/Outline Button - Light background */
+  .btn-secondary {
+    background-color: #f9faf9;
+    color: #0d192d;
+    border: 1px solid rgba(145, 149, 146, 0.15);
+    border-radius: 50px;
+    transition: background-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    will-change: border-radius, background-color;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a5a5a;
+    color: white;
+    border-radius: 0px;
+    border-color: #5a5a5a;
+  }
+
+  .btn-secondary .btn-icon {
+    opacity: 0;
+    max-width: 0;
+    margin-left: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  .btn-secondary:hover .btn-icon {
+    opacity: 1;
+    max-width: 24px;
+    margin-left: 4px;
+    transform: translateX(0);
+  }
+
+  /* White Button - for dark backgrounds */
+  .btn-white {
+    background-color: white;
+    color: #0d192d;
+    border-radius: 50px;
+    transition: background-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    will-change: border-radius, background-color;
+  }
+
+  .btn-white:hover {
+    background-color: #5a5a5a;
+    color: white;
+    border-radius: 0px;
+  }
+
+  .btn-white span,
+  .btn-white svg {
+    transition: color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .btn-white:hover span,
+  .btn-white:hover svg {
+    color: white;
+  }
+
+  .btn-white .btn-icon {
+    opacity: 0;
+    max-width: 0;
+    margin-left: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  .btn-white:hover .btn-icon {
+    opacity: 1;
+    max-width: 24px;
+    margin-left: 4px;
+    transform: translateX(0);
+  }
+
+  /* Page transitions */
+  .page-transition-enter {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .page-transition-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms ease-in, transform 300ms ease-in;
+  }
+
+  .page-transition-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .page-transition-exit-active {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 300ms ease-in, transform 300ms ease-in;
+  }
+
+  /* ---- react-select / select styling to match form inputs ---- */
+  .react-select-container .react-select__control {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: none;
+    min-height: 36px; /* matches input line height on mobile */
+    padding: 0 6px;
+  }
+
+  .react-select-container .react-select__value-container {
+    padding: 0;
+  }
+
+  .react-select-container .react-select__single-value,
+  .react-select-container .react-select__option,
+  .react-select-container .react-select__input input {
+    font-family: "Outfit", sans-serif;
+    font-size: 16px; /* text-card-mobile */
+    line-height: 1.4;
+    color: #fff;
+  }
+
+  .react-select-container .react-select__indicator-separator {
+    display: none;
+  }
+  .react-select-container .react-select__dropdown-indicator svg {
+    color: #fff;
+  }
+
+  .react-select-container .react-select__option {
+    padding: 8px 12px;
+  }
+
+  /* Ensure flags scale with text using em */
+  .react-select-container .react-select__single-value svg,
+  .react-select-container .react-select__option svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+  }
+
+  /* Make menu lists scrollable with mouse wheel and touch — allow momentum scrolling on iOS */
+  .react-select-container .react-select__menu-list {
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    overscroll-behavior: contain;
+  }
+
+  /* Specific overrides for the compact code select to prevent an extra short underline */
+  .react-select-code .react-select__control {
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+  .react-select-code .react-select__control .react-select__value-container {
+    padding-bottom: 0 !important;
+  }
+  .react-select-code .react-select__single-value {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .react-select-container .react-select__single-value,
+    .react-select-container .react-select__option,
+    .react-select-container .react-select__input input {
+      font-size: 20px; /* md:text-card */
+    }
+    .react-select-container .react-select__control {
+      min-height: 44px;
+    }
+  }
+}
+
+@layer utilities {
+  /* Delay utilities */
+  .delay-100 {
+    transition-delay: 0.1s;
+  }
+
+  .delay-200 {
+    transition-delay: 0.2s;
+  }
+
+  .delay-300 {
+    transition-delay: 0.3s;
+  }
+
+  .delay-400 {
+    transition-delay: 0.4s;
+  }
+
+  .delay-500 {
+    transition-delay: 0.5s;
+  }
+
+  .delay-600 {
+    transition-delay: 0.6s;
+  }
+
+  .delay-700 {
+    transition-delay: 0.7s;
+  }
+
+  .delay-800 {
+    transition-delay: 0.8s;
+  }
+
+  .delay-900 {
+    transition-delay: 0.9s;
+  }
+
+  .delay-1000 {
+    transition-delay: 1s;
+  }
+
+  /* Pulse animation */
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .animate-pulse-custom {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Bounce animation */
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(-25%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: none;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+
+  .animate-bounce-custom {
+    animation: bounce 1s infinite;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1d3357;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #0d192d;
+  }
+
+  /* Custom dropdown select styling */
+  select {
+    background-color: #0d192d !important;
+    color: white !important;
+    border: none !important;
+    outline: none !important;
+  }
+
+  select option {
+    background-color: #0d192d !important;
+    color: white !important;
+    padding: 8px 12px !important;
+    border: none !important;
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+  }
+
+  select option:hover {
+    background-color: #1d3357 !important;
+    color: white !important;
+  }
+
+  select option:checked {
+    background-color: #1d3357 !important;
+    color: white !important;
+  }
+
+  /* Firefox specific dropdown styling */
+  @-moz-document url-prefix() {
+    select {
+      background-color: #0d192d !important;
+      color: white !important;
+    }
+
+    select option {
+      background-color: #0d192d !important;
+      color: white !important;
+    }
+  }
+
+  /* Contact form select specific styling */
+  .contact-form-select {
+    background: #0d192d !important;
+    color: white !important;
+    border: none !important;
+    outline: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+  }
+
+  .contact-form-select option {
+    background-color: #0d192d !important;
+  }
+
+  /* Force underline for the Job Role native select (overrides global select { border: none !important }) */
+  .job-role-select {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+    padding-bottom: 0.75rem !important; /* align with pb-3 */
+  }
+
+  .contact-form-select option:hover,
+  .contact-form-select option:focus {
+    background-color: #1d3357 !important;
+    background: #1d3357 !important;
+    color: white !important;
+  }
+
+  .contact-form-select option:checked,
+  .contact-form-select option:selected {
+    background-color: #1d3357 !important;
+    background: #1d3357 !important;
+    color: white !important;
+  }
+
+  /* Windows specific styling */
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .contact-form-select option {
+      background-color: #0d192d !important;
+      color: white !important;
+    }
+  }
+}
+
+/* in globals.css or a component css */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE + Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Infinite scroll animation for partner logos */
+@keyframes scroll-logos {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Ensure the animation is smooth and truly infinite */
+@keyframes scroll-infinite {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-infinite {
+  animation: scroll-infinite 15s linear infinite;
+}
+
+.animate-scroll-infinite:hover {
+  animation-play-state: paused;
+}
