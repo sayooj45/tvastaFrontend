@@ -1,52 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 
 
 const BrochureForm = ({onClose}) => {
- const handleSubmit = async (e) => {
+
+const [loading, setLoading] = useState(false);
+const [status, setStatus] = useState(""); 
+
+
+const handleSubmit = async (e) => {
   e.preventDefault();
 
-  const formData = {
-    FullName: e.target.fullName.value,
-    Email: e.target.email.value,
-    Mobile: e.target.mobile.value,
-    Company: e.target.company.value,
-    Role: e.target.role.value,
-    Date: new Date().toLocaleString(),
+  setLoading(true);
+  setStatus("idle");
+
+  const formData = new URLSearchParams();
+  formData.append("FullName", e.target.fullName.value);
+  formData.append("Email", e.target.email.value);
+  formData.append("Mobile", e.target.mobile.value);
+  formData.append("Company", e.target.company.value);
+  formData.append("Role", e.target.role.value);
+  formData.append("Date", new Date().toLocaleString());
+
+  const url =
+    "https://script.google.com/macros/s/AKfycbx2k2Y3b5jtgO_aeKi-ql68LLpVWR2N5IdITS3uXUDdaYwy6wU_IkZXxM32LRb0QDFbUQ/exec";
+
+      try {
+        await fetch(url, {
+          method: "POST",
+          body: formData,
+        });
+
+        setStatus("success");
+
+        // Download brochure
+        const link = document.createElement("a");
+        link.href = "/Tech_Brochure_Dummy.pdf";
+        link.download = "Tech-Brochure.pdf";
+        link.click();
+
+        setTimeout(() => {
+          onClose();
+        }, 2000);
+
+      } catch (error) {
+        setStatus("error");
+      } finally {
+        setLoading(false);
+      }
   };
 
-  const url = "https://script.google.com/macros/s/AKfycbxmLx8E7mNHnALhZDnZxEpg4WSvAiD-H1K49VOBoE_T-tbAcMusBlldcn5HeX4Dd5_zwA/exec";
-
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      mode: "no-cors", 
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-
-    alert("Form submitted successfully!");
-
-    // Download dummy brochure
-  const link = document.createElement("a");
-  link.href = "/Tech_Brochure_Dummy.pdf"; 
-  link.download = "Tech-Brochure.pdf";
-  link.click();
-
-  } catch (error) {
-    console.log(error);
-  }
-};
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto"
     onClick={onClose}>
       
       {/* Form Container */}
-      <div className="relative bg-[#071A2F] w-full max-w-3xl rounded-xl  p-8 text-white"
+      <div className="relative bg-[#071A2F] w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-xl p-8 text-white"
       onClick={(e) => e.stopPropagation()}>
+
+        {/* close button  */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-white text-2xl hover:text-gray-400 transition"
+        >
+          &times;
+        </button>
 
         {/* Header */}
         <div className=" p-6 mb-8">
@@ -124,15 +143,31 @@ const BrochureForm = ({onClose}) => {
           </div>
 
           {/* Submit Button */}
-          <div className="pt-4">
-            <button
-              type="submit"
-              className="bg-[#E53935] hover:bg-[#d32f2f] transition-all duration-300 px-6 py-3 rounded-full font-semibold flex items-center gap-2"
-            >
-              Submit And Download
-              {/* <Download size={16} /> */}
-            </button>
-          </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-[#E53935] hover:bg-[#d32f2f] transition-all duration-300 px-6 py-3 rounded-full font-semibold flex items-center gap-2 disabled:opacity-60"
+          >
+            {loading ? (
+              <>
+                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                Submitting...
+              </>
+            ) : (
+              "Submit And Download"
+            )}
+          </button>
+          {status === "success" && (
+            <p className="text-green-400 text-sm mt-3">
+              Brochure download started successfully.
+            </p>
+          )}
+
+          {status === "error" && (
+            <p className="text-red-400 text-sm mt-3">
+              Submission failed. Please try again.
+            </p>
+          )}
 
         </form>
       </div>

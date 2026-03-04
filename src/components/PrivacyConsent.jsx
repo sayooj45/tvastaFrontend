@@ -41,7 +41,7 @@ const PrivacyConsent = () => {
             }}/>
             <span className="text-sm md:text-lg text-white">
               I accept the{" "}
-              <Link to="#" className="underline">
+              <Link to="/privacy-Policy" className="underline">
                 Privacy Policy*
               </Link>
             </span>
